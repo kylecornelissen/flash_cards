@@ -1,15 +1,13 @@
-
-
-
 class Turn
+
   attr_reader :guess,
               :card,
               :answer
 
 
   def initialize(guess_arg, card_arg)
-    @guess = guess_arg
-    @card = card_arg
+    @guess  = guess_arg
+    @card   = card_arg
     correct = true
   end
 
