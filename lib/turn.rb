@@ -1,22 +1,21 @@
 class Turn
 
   attr_reader :guess,
-              :card,
-              :answer
-
+              :card
+    #all attr_reader are initialized variables only
 
   def initialize(guess_arg, card_arg)
     @guess  = guess_arg
     @card   = card_arg
-    correct = true
+
+    #all initialized variables should be instance variables
   end
 
   def correct?
     if guess == card.answer
-
-      @correct = true
+      correct = true
     else
-      @correct = false
+      correct = false
     end
 
   end
