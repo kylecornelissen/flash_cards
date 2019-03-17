@@ -1,8 +1,6 @@
 class Deck
 
-  attr_reader :cards,
-              :card,
-              :category
+  attr_reader :cards
 
 #initialize deck class
   def initialize(cards_arg)
@@ -19,7 +17,7 @@ class Deck
     @cards.find_all do |card|
       card.category == category_arg
     end
-    
+
   end
 
 end

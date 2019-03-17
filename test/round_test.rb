@@ -19,24 +19,35 @@ class RoundTest < Minitest::Test
   end
 
   def test_it_exists
+    skip
     assert_instance_of Round, @round
   end
 
   def test_current_card_is_first_card
+    skip
     assert_equal @round.current_card, @card_1
   end
 
-  def test_it_will_take_turn
-
-
+  def test_take_turn_method_will_take_turn
+    skip
     new_turn = @round.take_turn("Juneau")
-    assert_instance_of Turn, new_turn[0]
+
+    assert_instance_of Turn, new_turn
   end
 
   def test_it_will_add_turn_object_to_turns_array
-
+    skip
     new_turn = @round.take_turn("Juneau")
+
     assert_equal @round.turns, [new_turn]
+  end
+
+  def test_number_correct_will_increase
+    new_turn = @round.take_turn("Juneau")
+    new_turn2 = @round.take_turn("Mars")
+    new_turn3 = @round.take_turn("North Pole") #wrong answer
+
+    assert_equal 2, @round.number_correct
   end
 
 end
