@@ -26,13 +26,13 @@ class Round
   def number_correct
     correct_answers = []
     @turns.each do |turn|
-      correct_answers << turn.correct? == true
+      correct_answers << turn.correct?
     end
-    correct_answers.count
+    correct_answers.count(true)
   end
 
 
-  def number_correct_by_category
+  def number_correct_by_category(category_arg)
 
   end
 
