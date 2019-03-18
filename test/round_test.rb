@@ -11,7 +11,7 @@ class RoundTest < Minitest::Test
 
 
   def test_it_exists
-    skip
+    
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -27,7 +27,7 @@ class RoundTest < Minitest::Test
   end
 
   def test_current_card_is_first_card
-    skip
+
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -43,7 +43,7 @@ class RoundTest < Minitest::Test
   end
 
   def test_take_turn_method_will_take_turn
-    skip
+
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -58,7 +58,7 @@ class RoundTest < Minitest::Test
   end
 
   def test_it_will_add_turn_object_to_turns_array
-    skip
+
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -75,7 +75,7 @@ class RoundTest < Minitest::Test
   end
 
   def test_number_correct_will_increase
-    skip
+
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -92,6 +92,7 @@ class RoundTest < Minitest::Test
   end
 
   def test_number_correct_by_category_is_correct
+
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -101,13 +102,43 @@ class RoundTest < Minitest::Test
     @round = Round.new(@deck)
 
     new_turn = @round.take_turn("Juneau")
-    # new_turn2 = @round.take_turn("Venus")
-
-    
-
+    new_turn2 = @round.take_turn("Venus")
+    # new_turn3 = @round.take_turn("")
 
     assert_equal 1, @round.number_correct_by_category(:Geography)
-    # assert_equal 0, @round.number_correct_by_category(:STEM)
+    assert_equal 0, @round.number_correct_by_category(:STEM)
+  end
+
+  def test_percent_correct
+    @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+    @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
+    @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
+
+    @deck = Deck.new([@card_1, @card_2, @card_3])
+
+    @round = Round.new(@deck)
+
+    new_turn = @round.take_turn("Juneau")
+    new_turn2 = @round.take_turn("Venus")
+
+    assert_equal 50.0, @round.percent_correct
+  end
+
+  def test_percent_correct_by_category
+
+    @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+    @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
+    @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
+
+    @deck = Deck.new([@card_1, @card_2, @card_3])
+
+    @round = Round.new(@deck)
+
+    new_turn = @round.take_turn("Juneau")
+    new_turn2 = @round.take_turn("Venus")
+
+    assert_equal 100.0, @round.percent_correct_by_category(:Geography)
+    assert_equal 0.0, @round.percent_correct_by_category(:STEM)
   end
 
 end
@@ -121,7 +152,7 @@ end
 # card_3 = Card.new("Describe in words the exact direction that is 697.5° clockwise from due north?", "North north west", :STEM)
 # deck = Deck.new([card_1, card_2, card_3])
 # round = Round.new(deck)
-#
+
 # round.deck
 # round.turns
 # round.current_card

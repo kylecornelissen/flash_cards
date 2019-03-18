@@ -24,12 +24,12 @@ class Round
   end
 # create method that counts number of correct questions
   def number_correct
-    correct_answers = []
+    @correct_answers = []
 
     @turns.each do |turn|
-      correct_answers << turn.correct?
+      @correct_answers << turn.correct?
     end
-    correct_answers.count(true)
+    @correct_answers.count(true)
   end
 
 # create method that counts number of correct questions when given a category
@@ -48,19 +48,22 @@ class Round
     # correct_guesses_in_category = @turns.each { |turn| turn.correct? && turn.card.category == category_arg}.count
     correct_guesses_in_category = []
     @turns.each do |turn|
-
       correct_guesses_in_category << turn if turn.correct? && turn.card.category == category_arg
     end
     correct_guesses_in_category.count
-      # correct_guess << turn
-
-
-
 
   end
 
-  # def percent_correct_by_category
-  #   correct_answers_per_category.count(true) / category_total.count
-  # end
+  def percent_correct
+    number_correct.to_f / @turns.count * 100
+  end
+
+  def percent_correct_by_category(category_arg)
+    total_guesses_in_category = []
+    @turns.each do |turn|
+      total_guesses_in_category << turn if turn.card.category == category_arg
+    end
+    number_correct_by_category(category_arg).to_f / total_guesses_in_category.count * 100
+  end
 
 end
