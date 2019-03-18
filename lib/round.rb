@@ -1,7 +1,7 @@
 class Round
   attr_reader :deck,
               :turns
-#initialize method
+# initialize method
   def initialize(deck_arg)
     @deck     = deck_arg
     @turns    = []
@@ -12,7 +12,7 @@ class Round
     @deck.cards[0]
   end
 
-#create method that inserts guess_arg into new turn object
+# create method that inserts guess_arg into new turn object
   def take_turn(guess_arg)
 
     turn_obj = Turn.new(guess_arg, current_card)
@@ -22,23 +22,45 @@ class Round
 
     turn_obj
   end
-
+# create method that counts number of correct questions
   def number_correct
     correct_answers = []
+
     @turns.each do |turn|
       correct_answers << turn.correct?
     end
     correct_answers.count(true)
   end
 
-
+# create method that counts number of correct questions when given a category
   def number_correct_by_category(category_arg)
+    # correct_category = []
+    #
+    # @turns.each do {|turn|turn.card.category == category_arg}
+    #
+    #   correct_category << turn
+
+    # end
+    # correct_category.count
+
+    # correct_guess = []
+
+    # correct_guesses_in_category = @turns.each { |turn| turn.correct? && turn.card.category == category_arg}.count
+    correct_guesses_in_category = []
+    @turns.each do |turn|
+
+      correct_guesses_in_category << turn if turn.correct? && turn.card.category == category_arg
+    end
+    correct_guesses_in_category.count
+      # correct_guess << turn
+
+
+
 
   end
 
-
-
-
-
+  # def percent_correct_by_category
+  #   correct_answers_per_category.count(true) / category_total.count
+  # end
 
 end

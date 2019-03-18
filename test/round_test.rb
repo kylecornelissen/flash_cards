@@ -75,6 +75,7 @@ class RoundTest < Minitest::Test
   end
 
   def test_number_correct_will_increase
+    skip
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
     @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
@@ -82,42 +83,60 @@ class RoundTest < Minitest::Test
     @deck = Deck.new([@card_1, @card_2, @card_3])
 
     @round = Round.new(@deck)
-    @round.deck
-    @round.turns
-    @round.current_card
-    new_turn = @round.take_turn("Juneau") #wrong answer
 
-    new_turn.class
-    new_turn.correct?
+    new_turn = @round.take_turn("Juneau")
 
-    @round.turns
+
 
     assert_equal 1, @round.number_correct
   end
 
+  def test_number_correct_by_category_is_correct
+    @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+    @card_2 = Card.new("The viking spacecraft sent back to earth photographs and reports about the surface of Which planet?", "Mars", :STEM)
+    @card_3 = Card.new("Describe in words the exact direction that is 697.5˚ clockwise form due north?", "North north west", :STEM)
+
+    @deck = Deck.new([@card_1, @card_2, @card_3])
+
+    @round = Round.new(@deck)
+
+    new_turn = @round.take_turn("Juneau")
+    # new_turn2 = @round.take_turn("Venus")
+
+    
+
+
+    assert_equal 1, @round.number_correct_by_category(:Geography)
+    # assert_equal 0, @round.number_correct_by_category(:STEM)
+  end
+
 end
 
-require './lib/card'
-require './lib/deck'
-require './lib/round'
-require './lib/turn'
-card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
-card_2 = Card.new("The Viking spacecraft sent back to Earth photographs and reports about the surface of which planet?", "Mars", :STEM)
-card_3 = Card.new("Describe in words the exact direction that is 697.5° clockwise from due north?", "North north west", :STEM)
-deck = Deck.new([card_1, card_2, card_3])
-round = Round.new(deck)
-round.deck
-round.turns
-round.current_card
-new_turn = round.take_turn("Denver")
-new_turn.class
-new_turn.correct?
+# require './lib/card'
+# require './lib/deck'
+# require './lib/round'
+# require './lib/turn'
+# card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+# card_2 = Card.new("The Viking spacecraft sent back to Earth photographs and reports about the surface of which planet?", "Mars", :STEM)
+# card_3 = Card.new("Describe in words the exact direction that is 697.5° clockwise from due north?", "North north west", :STEM)
+# deck = Deck.new([card_1, card_2, card_3])
+# round = Round.new(deck)
+#
+# round.deck
+# round.turns
+# round.current_card
+# new_turn = round.take_turn("Juneau")
+#
+# new_turn.class
+# new_turn.correct?
 # round.turns
 # round.number_correct
+#
 # round.current_card
 # round.take_turn("Venus")
 # round.turns.count
 # round.turns.last.feedback
+#
 # round.number_correct
 # round.number_correct_by_category(:Geography)
 # round.number_correct_by_category(:STEM)
