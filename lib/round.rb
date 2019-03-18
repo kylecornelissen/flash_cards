@@ -8,6 +8,23 @@ class Round
 
   end
 
+  def start
+
+    e = 0 # element variable
+    puts "Welcome! You're playing with #{@deck.count} cards."
+    puts "-----------------------------------------"
+    #loop below until cards run out
+    deck.count.times do
+      puts "This is card number #{e + 1} out of #{deck.count}."
+      puts "Question: #{@deck.cards[e].question}"
+    # get answer from user
+      take_turn(gets.chomp)
+      #puts "#{@turn.feedback}"
+      e += 1
+    end
+
+  end
+
   def current_card
     @deck.cards[0]
   end
